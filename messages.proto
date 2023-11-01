@@ -1,0 +1,28 @@
+syntax = "proto3";
+option go_package = "github.com/mikkoryynanen/real-time/messages";
+
+message Vector2 {
+	float X = 1;
+	float Y = 2;
+}
+
+message ClientConnectionResponse {
+	string sessionId = 1;
+}
+
+message ClientInputRequest {
+	Vector2 input = 1;
+}
+
+message GameState {
+	Vector2 clientPosition = 2;
+}
+
+message WrapperMessage {
+	string sessionId = 1;
+	int32 messageType = 2;
+	oneof msg {
+		ClientConnectionResponse clientConnectionResponse = 3;
+		ClientInputRequest clientInputRequest = 4;
+	}
+}
